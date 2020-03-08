@@ -115,14 +115,14 @@ namespace MineSweeper
                         if (!field[i, j].flaged)
                         {
                             Image img1 = new Image();
-                            img1.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\mine_explode.jpg"));
+                            img1.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\mine_explode.jpg"));
                             field[i, j].button .Background = Brushes.Red;
                             field[i, j].button .Content = img1;
                         }
                         else
                         {
                             Image img1 = new Image();
-                            img1.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\mine_defused.jpg"));
+                            img1.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\mine_defused.jpg"));
                             field[i, j].button .Background = Brushes.Yellow;
                             field[i, j].button .Content = img1;                            
                         }
@@ -147,7 +147,8 @@ namespace MineSweeper
                         else
                         {
                             Image img1 = new Image();
-                            img1.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\mine_defused.jpg"));
+                            img1.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\mine_defused.jpg"));
+                            
                             field[i, j].button .Background = Brushes.Yellow;
                             field[i, j].button .Content = img1;
                             field[i, j].status = false; field[i, j].button .IsEnabled = false;
@@ -185,7 +186,7 @@ namespace MineSweeper
             {
                 field[i, j].flaged = true; 
                 Image img1 = new Image();
-                img1.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\flag.jpg"));
+                img1.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\flag.jpg"));
                 field[i, j].button .Content = img1;
                 int count = Convert.ToInt32(Count_mine.Content);
                 count--;
@@ -238,42 +239,42 @@ namespace MineSweeper
                 {
                     case 1:
                         {
-                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\1.jpg"));
+                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\1.jpg"));
                             break;
                         }
                     case 2:
                         {
-                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\2.jpg"));
+                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\2.jpg"));
                             break;
                         }
                     case 3:
                         {
-                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\3.jpg"));
+                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\3.jpg"));
                             break;
                         }
                     case 4:
                         {
-                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\4.jpg"));
+                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\4.jpg"));
                             break;
                         }
                     case 5:
                         {
-                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\5.jpg"));
+                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\5.jpg"));
                             break;
                         }
                     case 6:
                         {
-                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\6.jpg"));
+                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\6.jpg"));
                             break;
                         }
                     case 7:
                         {
-                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\7.jpg"));
+                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\7.jpg"));
                             break;
                         }
                     case 8:
                         {
-                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\8.jpg"));
+                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\8.jpg"));
                             break;
                         } 
                 } 

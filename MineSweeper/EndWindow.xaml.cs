@@ -22,11 +22,11 @@ namespace MineSweeper
                
             if (win)
             {
-                Title.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\Win.jpg")));
+                Title.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\Win.jpg")));
             }
             else
             {
-                Title.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\Lose.jpg")));
+                Title.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\Lose.jpg")));
             }
             Score_box.Content = Convert.ToString(score);
             NextGame.Click += NextGame_Click;            

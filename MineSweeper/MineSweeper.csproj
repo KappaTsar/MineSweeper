@@ -49,9 +49,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Game_icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -128,6 +132,48 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\6.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\7.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\8.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\flag.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\Lose.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\mine_defused.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\mine_explode.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\Win.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Game_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
