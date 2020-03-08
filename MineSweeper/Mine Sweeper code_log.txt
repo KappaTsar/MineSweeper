@@ -1,0 +1,378 @@
+------------------------ xaml
+<Window x:Name="MineSweeper" x:Class="MineSweeper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MineSweeper"
+        mc:Ignorable="d"
+        Title="Mine Sweeper" Cursor="Hand" Width="568" Height="540.66">
+    <Grid x:Name="Board" Height="510" VerticalAlignment="Top"  >
+        <ComboBox x:Name="Diff" HorizontalAlignment="Left" Height="24" Margin="24,57,0,0" VerticalAlignment="Top" Width="136">
+            <ComboBoxItem x:Name="easyCB" Content="Easy" HorizontalAlignment="Left" Width="175" IsSelected="True" AutomationProperties.ItemType="String"/>
+            <ComboBoxItem x:Name="meddiumCB" Content="Meddium" HorizontalAlignment="Left" Width="175" AutomationProperties.ItemType="String"/>
+            <ComboBoxItem x:Name="hardCB" Content="Hard" HorizontalAlignment="Left" Width="175" AutomationProperties.ItemType="String"/>
+        </ComboBox>
+        <TextBox HorizontalAlignment="Left" Height="20" Margin="24,37,0,0" TextWrapping="Wrap" Text="Choose difficalty:" VerticalAlignment="Top" Width="100" BorderBrush="{x:Null}"/>
+        <Grid x:Name="Field" Margin="0,108,0,0" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
+        <Button x:Name="New_Game" Content="New Game" HorizontalAlignment="Left" Height="24" Margin="225,57,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="0.946,0.667" Foreground="Black" >
+        </Button>
+        <TextBox HorizontalAlignment="Left" Height="19" Margin="398,62,0,0" TextWrapping="Wrap" Text="Left mines:" VerticalAlignment="Top" Width="67" RenderTransformOrigin="0.343,0.105" Background="{x:Null}" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="Count_mine" HorizontalAlignment="Left" Height="19" Margin="465,60,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="69"/>
+    </Grid>
+
+
+</Window>
+------------------------- xaml.cs
+   public partial class MainWindow : Window
+    {
+        class Desk  
+        {
+            public string value;            
+            public object button;
+            public bool status;
+            public bool flaged;
+        }        
+        private void GameOver(ref Desk[,] field, int n, int m) // end of game if player pick mine
+        {            
+            for (int i = 0; i < n; i++)
+                for (int j = 0; j < m; j++)
+                {                    
+                    if (field[i, j].value == "*")
+                    {
+                        Image img1 = new Image();
+                        img1.Source = new BitmapImage(new Uri(@"C:\Users\Vanya\Desktop\Projects\MineSweeper\MineSweeper\images\mine_explode.jpg"));
+                        (field[i, j].button as Button).Background = Brushes.Red;
+                        (field[i, j].button as Button).Content = img1;
+                    }
+                }
+            Field.IsEnabled = false;
+            MessageBox.Show("You lose!");            
+        }
+
+        private void Victory(ref Desk[,] field, int n, int m) // end of game if playey set all flags
+        {
+            bool win = true;
+            for (int i = 0; i < n; i++)
+                for (int j = 0; j < m; j++)
+                {
+                    if (field[i, j].flaged)
+                        if (field[i, j].value != "*")
+                            win = false;
+                }
+            if(win)
+             MessageBox.Show("You win!");
+            else GameOver(ref field, n, m);
+        }
+
+        private void Action(int i, int j, ref Desk[,] field, int n, int m) // action which happend after common click
+        {            
+            if (!field[i, j].flaged)
+            {
+                if (field[i, j].value == "*")
+                {
+                    GameOver(ref field, n, m);
+                }
+                else
+                {
+                    Counter(ref field, i, j, n, m);
+                }
+            }
+        }
+
+        private void Defuse(int i, int j, ref Desk[,] field, int n, int m) // setting on and setting off flags
+        {
+            if (!field[i, j].flaged)
+            {
+                field[i, j].flaged = true; 
+                Image img1 = new Image();
+                img1.Source = new BitmapImage(new Uri(@"C:\Users\Vanya\Desktop\Projects\MineSweeper\MineSweeper\images\flag.jpg"));
+                (field[i, j].button as Button).Content = img1;
+                int count = Convert.ToInt32(Count_mine.Text);
+                count--;
+                if (count == 0)
+                    Victory(ref field, n, m);
+                Count_mine.Text = Convert.ToString(count);
+            }
+            else
+            {
+                field[i, j].flaged = false; 
+                (field[i, j].button as Button).Content = ' ';
+                int count = Convert.ToInt32(Count_mine.Text);
+                count++;                
+                Count_mine.Text = Convert.ToString(count);
+            }                      
+        }
+
+        private void Counter(ref Desk[,] field, int i , int j, int n, int m) // counting number of mines around chosen button
+        {            
+            field[i, j].status = false; (field[i, j].button as Button).IsEnabled = false;
+            int count = 0;
+            int startN = i - 1, endN = i + 2;
+            int startM = j - 1, endM = j + 2;
+
+            while (n < endN)
+                endN--;
+            
+            while (-1 >= startN)
+                startN++;
+            
+            while(m < endM)
+                endM--;
+            
+            while(-1 >= startM)
+                startM++;
+            
+            for (int ik = startN; ik < endN; ik++)
+                for (int jk = startM; jk < endM; jk++)
+                {                    
+                    if (field[ik, jk].status)                    
+                        if (field[ik, jk].value == "*")
+                        {
+                            //(field[ik, jk].button as Button).Background = Brushes.Red;
+                            count++;                                                     
+                        }                                             
+                }
+            
+            Image img = new Image();
+            if (count != 0)
+            {                
+                switch (count)
+                {
+                    case 1:
+                        {
+                            img.Source = new BitmapImage(new Uri(@"C:\Users\Vanya\Desktop\Projects\MineSweeper\MineSweeper\images\1.jpg"));
+                            break;
+                        }
+                    case 2:
+                        {
+                            img.Source = new BitmapImage(new Uri(@"C:\Users\Vanya\Desktop\Projects\MineSweeper\MineSweeper\images\2.jpg"));
+                            break;
+                        }
+                    case 3:
+                        {
+                            img.Source = new BitmapImage(new Uri(@"C:\Users\Vanya\Desktop\Projects\MineSweeper\MineSweeper\images\3.jpg"));
+                            break;
+                        }
+                    case 4:
+                        {
+                            img.Source = new BitmapImage(new Uri(@"C:\Users\Vanya\Desktop\Projects\MineSweeper\MineSweeper\images\4.jpg"));
+                            break;
+                        }
+                    case 5:
+                        {
+                            img.Source = new BitmapImage(new Uri(@"C:\Users\Vanya\Desktop\Projects\MineSweeper\MineSweeper\images\5.jpg"));
+                            break;
+                        }
+                    case 6:
+                        {
+                            img.Source = new BitmapImage(new Uri(@"C:\Users\Vanya\Desktop\Projects\MineSweeper\MineSweeper\images\6.jpg"));
+                            break;
+                        }
+                    case 7:
+                        {
+                            img.Source = new BitmapImage(new Uri(@"C:\Users\Vanya\Desktop\Projects\MineSweeper\MineSweeper\images\7.jpg"));
+                            break;
+                        }
+                    case 8:
+                        {
+                            img.Source = new BitmapImage(new Uri(@"C:\Users\Vanya\Desktop\Projects\MineSweeper\MineSweeper\images\8.jpg"));
+                            break;
+                        } 
+                } 
+            }
+            else
+            {
+                for (int ik = startN; ik < endN; ik++)
+                    for (int jk = startM; jk < endM; jk++)
+                    {
+                        if (field[ik, jk].status)
+                            Counter(ref field, ik, jk, n, m);
+                    }
+            } 
+            (field[i, j].button as Button).Content = img;
+        }
+
+        public MainWindow()
+        { InitializeComponent();
+            
+            Count_mine.Text = "0";            
+            New_Game.Click += New_Game_Click;            
+
+            /*
+             * DispatcherTimer dispacherTimer = new DispathcerTimer(100);
+             * timer.
+             * if (e.RightButton = )
+            {
+                richTextBox1.AppendText("Left Button Press\n");
+            }
+            if (e.Button == MouseButtons.Right)
+            {
+                richTextBox1.AppendText("Right Button Press\n");
+            }
+             */
+        } 
+        
+        private void New_Game_Click(object sender, RoutedEventArgs e)
+        {
+            Random rnd = new Random();
+            if (easyCB.Equals(Diff.SelectedItem))  // Easy
+            {
+                // 9 x 9                 
+                MessageBox.Show("Easy mode"); Field.IsEnabled = true;
+                MineSweeper.Height = 500; MineSweeper.Width = 600;
+                Field.Height = 270; Field.Width = 270; Field.Margin = new Thickness(25, 70, 50, 100);                
+                Count_mine.Text = "10";
+                bool f = false;
+                
+                Desk[,] field = new Desk[9, 9];
+                
+                for (int i = 0; i < 9; i++) // creation of field
+                    for (int j = 0; j < 9; j++)
+                    {
+                        field[i, j] = new Desk();
+                        field[i, j].value = " ";
+                        field[i, j].status = true;
+                        field[i, j].flaged = false;
+                    }
+
+                for (int i = 0; i < 10; i++) // putting mines                
+                    do
+                    {
+                        int Fi = rnd.Next(9);
+                        int Fj = rnd.Next(9);
+                        if (field[Fi, Fj].value != "*")
+                        {
+                            field[Fi, Fj].value = "*";
+                            f = false;
+                        }
+                        else { f = true; }
+                    } while (f);                
+
+                for (int i = 0; i < 9; i++) // viusalisation of field
+                {
+                    Field.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(30) });
+                    Field.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(30) });
+                    for (int j = 0; j < 9; j++)
+                    {
+                        Button b = new Button();                        
+                        field[i, j].button = b;
+                        int a = i;
+                        int bb = j;
+                        b.Click += new RoutedEventHandler((s, ae) => Action(a, bb, ref field, 9, 9));
+                        b.MouseRightButtonDown += new MouseButtonEventHandler((s, ae) => Defuse(a, bb, ref field, 9, 9));
+                        Grid.SetRow(b, i);
+                        Grid.SetColumn(b, j);
+                        Field.Children.Add(b);
+                    }
+                }
+            }
+
+            if (meddiumCB.Equals(Diff.SelectedItem)) // Meddium bugged
+            {
+                // 16 x 16
+                MessageBox.Show("Meddium mode"); Field.IsEnabled = true;
+                MineSweeper.Height = 700; MineSweeper.Width = 700;
+                Field.Height = 1000; Field.Width = 480; Field.Margin = new Thickness( 0, 100, 50, 0 );
+                
+                Count_mine.Text = "40";
+                bool f = false;
+
+                Desk[,] field = new Desk[16, 16];
+
+                for (int i = 0; i < 16; i++) // creation of field
+                    for (int j = 0; j < 16; j++)
+                    {
+                        field[i, j] = new Desk();
+                        field[i, j].value = " ";
+                        field[i, j].status = true;
+                        field[i, j].flaged = false;
+                    }
+
+                for (int i = 0; i < 40; i++) // putting mines                
+                    do
+                    {
+                        int Fi = rnd.Next(16);
+                        int Fj = rnd.Next(16);
+                        if (field[Fi, Fj].value != "*")
+                        {
+                            field[Fi, Fj].value = "*";
+                            f = false;
+                        }
+                        else { f = true; }
+                    } while (f);                
+
+                for (int i = 0; i < 16; i++) // viusalisation of field
+                {
+                    Field.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(30) });
+                    Field.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(30) });
+                    for (int j = 0; j < 16; j++)
+                    {
+                        Button b = new Button();                        
+                        field[i, j].button = b;
+                        int a = i;
+                        int bb = j;
+                        b.Click += new RoutedEventHandler((s, ae) => Action(a, bb, ref field, 16, 16));
+                        b.MouseRightButtonDown += new MouseButtonEventHandler((s, ae) => Defuse(a, bb, ref field, 16, 16));
+                        Grid.SetRow(b, i);
+                        Grid.SetColumn(b, j);
+                        Field.Children.Add(b);
+                    }
+                }
+            }
+
+            if (hardCB.Equals(Diff.SelectedItem)) // Hard ..uncomplited
+            {
+                // 16 x 30 
+                MessageBox.Show("Hard mode"); Field.IsEnabled = true;
+                Field.Height = 400; Field.Width = 750; Field.Margin = new Thickness(25, 0, 50, 0);
+                Count_mine.Text = "99";
+                bool f = false;
+
+                Desk[,] field = new Desk[16, 30];
+
+                for (int i = 0; i < 16; i++) // creation of field
+                    for (int j = 0; j < 30; j++)
+                    {
+                        field[i, j] = new Desk();
+                        field[i, j].value = " ";
+                        field[i, j].status = true;
+                        field[i, j].flaged = false;
+                    }
+
+                for (int i = 0; i < 99; i++) // putting mines              
+                    do
+                    {
+                        int Fi = rnd.Next(16);
+                        int Fj = rnd.Next(30);
+                        if (field[Fi, Fj].value != "*")
+                        {
+                            field[Fi, Fj].value = "*";
+                            f = false;
+                        }
+                        else { f = true; }
+                    } while (f);
+                 
+
+                for (int i = 0; i < 16; i++) // viusalisation of field
+                {
+                    Field.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(25) });
+                    Field.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(25) });
+                    for (int j = 0; j < 30; j++)
+                    {
+                        Button b = new Button();                        
+                        field[i, j].button = b;
+                        int a = i;
+                        int bb = j;
+                        b.Click += new RoutedEventHandler((s, ae) => Action(a, bb, ref field, 16, 30));
+                        b.MouseRightButtonDown += new MouseButtonEventHandler((s, ae) => Defuse(a, bb, ref field, 16, 30));
+                        Grid.SetRow(b, i);
+                        Grid.SetColumn(b, j);
+                        Field.Children.Add(b);
+                    }
+                }
+            }
+
+        }  
+    }
+-------------------------
