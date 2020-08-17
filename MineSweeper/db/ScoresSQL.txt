@@ -1,0 +1,25 @@
+CREATE TABLE "Scores" 
+( 
+	"Player" 	TEXT, 
+	"Result" 	INTEGER NOT NULL, 
+	"Difficulty" 	TEXT 	NOT NULL, 
+	PRIMARY KEY("Player") 
+)
+
+CREATE VIEW EMScores AS 
+SELECT Player, Result 
+FROM Scores 
+WHERE Difficulty = "Easy" 
+ORDER BY Result
+
+CREATE VIEW HMScores AS 
+SELECT Player, Result 
+FROM Scores 
+WHERE Difficulty = "Hard" 
+ORDER BY Result
+
+CREATE VIEW NMScores AS 
+SELECT Player, Result 
+FROM Scores 
+WHERE Difficulty = "Normal" 
+ORDER BY Result

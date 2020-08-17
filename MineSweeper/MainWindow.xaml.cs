@@ -28,8 +28,9 @@ namespace MineSweeper
         }
 
         public MainWindow()
-        {
-            InitializeComponent();
+        {   InitializeComponent();
+
+            //Timer
             lblSeconds.Content = "00";
             lblMinutes.Content = "00";
             Count_mine.Content = "0";
@@ -57,48 +58,50 @@ namespace MineSweeper
             else lblMinutes.Content = Convert.ToString(min);
             CommandManager.InvalidateRequerySuggested();
         }
-        private int Score(ref Desk[,] field, ref Settings game)// score counter
+
+        private int ScoreCounter(ref Desk[,] field, ref Settings game)// score counter in The end of game
         {
             int score = 0;
             int time = Convert.ToInt32(lblMinutes.Content) * 60 + Convert.ToInt32(lblSeconds.Content);
-            double aps = 0;
+            double aps;
             if (time != 0) 
                 aps = (game.clicks + game.R_clicks) / time;
             else
                 aps = (game.clicks + game.R_clicks) / 1;
+
             switch (game.width)
             {
-                case 9: // Hard mode
+                case 9: // Easy mode
                     {
-                        score = 5000 - 30 * (time / 20);
+                        score = 9000 - 15 * (time);
+                        if (score < 500) score = 500;                    
+                        if (aps >= 1) score += 250;
                         if (!game.result)
                         {
-                            score = (score - 5000) * (-1);
-                            while (score > 500) score -= 500;
+                            score /= 4;
                         }
-                        if (aps >= 1) score += 250;                        
                         break;
                     }
-                case 16: // Medium
+                case 16: // Medium mode
                     {
-                        score = 7500 - 20 * (time / 20) - 25 * game.R_clicks;
+                        score = 16000 - 15 * (time) - 25 * game.R_clicks;
+                        if (score < 1000) score = 1000;                        
+                        if (aps >= 1) score += 500;
                         if (!game.result)
                         {
-                            score = (score - 7500) * (-1);
-                            while (score > 500) score -= 500;
+                            score /= 4;
                         }
-                        if (aps >= 1) score += 400;
                         break;
                     }
-                case 30:
+                case 30: // Hard mode
                     {
-                        score = 10000 - 15 * (time / 20) - 50 * game.R_clicks;
+                        score = 30000 - 15 * (time) - 50 * game.R_clicks;
+                        if (score < 1500) score = 1500;                       
+                        if (aps >= 1) score += 750;
                         if (!game.result)
                         {
-                            score = (score - 10000) * (-1);
-                            while (score > 500) score -= 500;
+                            score /= 4;
                         }
-                        if (aps >= 1) score += 600;
                         break;
                     }
             }
@@ -115,14 +118,14 @@ namespace MineSweeper
                         if (!field[i, j].flaged)
                         {
                             Image img1 = new Image();
-                            img1.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\mine_explode.jpg"));
+                            img1.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\mine_explode.jpg"));
                             field[i, j].button .Background = Brushes.Red;
                             field[i, j].button .Content = img1;
                         }
                         else
                         {
                             Image img1 = new Image();
-                            img1.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\mine_defused.jpg"));
+                            img1.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\mine_defused.jpg"));
                             field[i, j].button .Background = Brushes.Yellow;
                             field[i, j].button .Content = img1;                            
                         }
@@ -130,13 +133,14 @@ namespace MineSweeper
                 }
             Field.IsEnabled = false;
             game.result = false;
-            EndWindow form = new EndWindow(false, Score(ref field, ref game));                      
+
+            EndWindow form = new EndWindow(false, ScoreCounter(ref field, ref game));                      
             form.Show();                     
         }       
 
         private void Victory(ref Desk[,] field, ref Settings game) // end of game if playey set all flags
         {
-            bool win = true;
+            bool win = true; //check if all flags was set correctly
             for (int i = 0; i < game.height; i++)
                 for (int j = 0; j < game.width; j++)
                 {
@@ -147,8 +151,7 @@ namespace MineSweeper
                         else
                         {
                             Image img1 = new Image();
-                            img1.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\mine_defused.jpg"));
-                            
+                            img1.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\mine_defused.jpg"));
                             field[i, j].button .Background = Brushes.Yellow;
                             field[i, j].button .Content = img1;
                             field[i, j].status = false; field[i, j].button .IsEnabled = false;
@@ -157,8 +160,9 @@ namespace MineSweeper
                 }
             if (win)
             {
+                Field.IsEnabled = false;
                 game.result = true;
-                EndWindow form = new EndWindow(true, Score(ref field, ref game));
+                EndWindow form = new EndWindow(true, ScoreCounter(ref field, ref game));
                 form.Show();
             }
             else GameOver(ref field, ref game);
@@ -186,7 +190,7 @@ namespace MineSweeper
             {
                 field[i, j].flaged = true; 
                 Image img1 = new Image();
-                img1.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\flag.jpg"));
+                img1.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\flag.jpg"));
                 field[i, j].button .Content = img1;
                 int count = Convert.ToInt32(Count_mine.Content);
                 count--;
@@ -239,42 +243,42 @@ namespace MineSweeper
                 {
                     case 1:
                         {
-                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\1.jpg"));
+                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\1.jpg"));
                             break;
                         }
                     case 2:
                         {
-                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\2.jpg"));
+                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\2.jpg"));
                             break;
                         }
                     case 3:
                         {
-                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\3.jpg"));
+                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\3.jpg"));
                             break;
                         }
                     case 4:
                         {
-                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\4.jpg"));
+                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\4.jpg"));
                             break;
                         }
                     case 5:
                         {
-                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\5.jpg"));
+                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\5.jpg"));
                             break;
                         }
                     case 6:
                         {
-                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\6.jpg"));
+                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\6.jpg"));
                             break;
                         }
                     case 7:
                         {
-                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\7.jpg"));
+                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\7.jpg"));
                             break;
                         }
                     case 8:
                         {
-                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"..\..\images\8.jpg"));
+                            img.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\8.jpg"));
                             break;
                         } 
                 } 
@@ -298,13 +302,15 @@ namespace MineSweeper
             clock.Stop();
             lblSeconds.Content = "00";
             lblMinutes.Content = "00";
-            
-            
-            Settings game = new Settings();
-            game.clicks = 0;
-            game.R_clicks = 0;
 
-            if (easyCB.Equals(Diff.SelectedItem))  // Easy
+
+            Settings game = new Settings
+            {
+                clicks = 0,
+                R_clicks = 0
+            };
+
+            if (easyCB.Equals(Diff.SelectedItem))  // Easy mode
             {
                 game.height = 9; game.width = 9; // 9 x 9 
                 game.mines = 10;
@@ -317,7 +323,7 @@ namespace MineSweeper
                 Field.Margin = new Thickness( 25, 70, 50, 100 );
             }
 
-            if (meddiumCB.Equals(Diff.SelectedItem)) // Meddium 
+            if (meddiumCB.Equals(Diff.SelectedItem)) // Meddium mode
             {
                 game.height = 16; game.width = 16; // 16 x 16 
                 game.mines = 40;
@@ -330,7 +336,7 @@ namespace MineSweeper
                 Field.Margin = new Thickness( 0, 100, 0, 0 );          
             }
 
-            if (hardCB.Equals(Diff.SelectedItem)) // Hard bugged
+            if (hardCB.Equals(Diff.SelectedItem)) // Hard mode
             {
                 game.height = 16; game.width = 30;  // 16 x 30 
                 game.mines = 99;
@@ -348,10 +354,12 @@ namespace MineSweeper
             for (int i = 0; i < game.height; i++) // creation of field
                 for (int j = 0; j < game.width; j++)
                 {
-                    field[i, j] = new Desk();
-                    field[i, j].value = " ";
-                    field[i, j].status = true;
-                    field[i, j].flaged = false;
+                    field[i, j] = new Desk
+                    {
+                        value = " ",
+                        status = true,
+                        flaged = false
+                    };
                 }
 
             bool f = false;
