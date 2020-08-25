@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MineSweeper
@@ -14,5 +15,8 @@ namespace MineSweeper
         public int clicks;
         public int R_clicks;
         public bool result;
+
+        public Thread GameTimer;
     }
+
 }

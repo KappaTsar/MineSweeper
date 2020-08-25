@@ -5,12 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MineSweeper"
         mc:Ignorable="d"
-        Title=" " Height="412" Width="400">
-
+        Title="EndWindow" Height="456" Width="804.5">
     <Grid>
-        <Grid x:Name="Title" Margin="10,10,10,96"/>
-        <Button x:Name= "NextGame" Content="OK" HorizontalAlignment="Left" Height="30" Margin="150,330,0,0" VerticalAlignment="Top" Width="100"/>
-        <Label Content="Your Score:" HorizontalAlignment="Left" Height="27" Margin="122,298,0,0" VerticalAlignment="Top" Width="69" BorderBrush="{x:Null}" IsEnabled="False" Foreground="Black"/>
-        <Label Content="0" x:Name="Score_box" HorizontalAlignment="Left" Height="27" Margin="191,298,0,0" VerticalAlignment="Top" Width="86" IsEnabled="False" Foreground="Black"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" MinHeight="45"/>
+        </Grid.RowDefinitions>
+
+        <WrapPanel Grid.Row="1">
+            <Button Content="Return" x:Name="ReturnButton" Margin="20,5,20,10" Click="ReturnButton_Click" Height="27" Width="55" />
+            <Button Content="Print"  x:Name="PrintButton"  Margin="20,5,20,10" Click="PrintButton_Click"  Height="27" Width="46" />
+        </WrapPanel>
+        <ListView x:Name="ScoreTab" HorizontalAlignment="Left" Height="320" VerticalAlignment="Top" Width="736" Margin="30,30,30,30">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Title}" Width="60">Player</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Company}" Width="80" >Score</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Width="57" >Difficulty</GridViewColumn>
+                </GridView>
+            </ListView.View>
+            <ListView.Resources>
+            </ListView.Resources>
+        </ListView>
     </Grid>
 </Window>

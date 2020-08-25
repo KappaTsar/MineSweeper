@@ -1,57 +1,104 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Data.Entity;
-using SQLiteApp;
+using System.IO;
+using System.Drawing;
+using System.Drawing.Printing;
+using System.Threading;
+using System.Data.SQLite;
+using System.Data;
 
 namespace MineSweeper
 {
-
+    /// <summary>
+    /// Interaction logic for EndWindow.xaml
+    /// </summary>
     public partial class EndWindow : Window
     {
-        private ApplicationContext db;
+        private System.ComponentModel.Container components;
+        private Font printFont;
+        private StreamReader streamToPrint;
 
-        public EndWindow(bool win, int scoreRes)
-        {   InitializeComponent();
+        public EndWindow()
+        {
+            InitializeComponent();
 
-            db = new ApplicationContext();
-            db.Scores.Load();
-            this.DataContext = db.Scores.Local.ToBindingList();
+            SQLiteConnection con = new SQLiteConnection("Data Source=db/ScoreTable.db");
+            con.Open();
 
-            InsertNameWin popOutWin = new InsertNameWin(new Score());
-
-            if (popOutWin.ShowDialog() == true)
+            SQLiteCommand cmd = new SQLiteCommand(con);
+            cmd.CommandText = "SELECT * from Scores";
+            using (SQLiteDataReader reader = cmd.ExecuteReader())
             {
-                Score score = popOutWin.Score;
-                db.Scores.Add(score);
-                db.SaveChanges();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                reader.Close();
+                con.Close();
+                //Grid.DataContext = dt;
+                /*while (reader.Read())
+                {
+                    
+                    //Console.WriteLine(reader["Player"] + " : " + reader["Result"] + " : " + reader["Difficulty"]);
+                }
+                con.Close();*/
             }
 
-            /* if (win)
-            {
-                Title.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\Win.jpg")));
-            }
-            else
-            {
-                Title.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + @"\images\Lose.jpg")));
-            }
-            Score_box.Content = Convert.ToString(scoreRes);*/
-            NextGame.Click += NextGame_Click;            
         }
 
-        private void NextGame_Click(object sender, RoutedEventArgs e)
-        {        
+        private void ReturnButton_Click(object sender, RoutedEventArgs e)
+        {
             Close();
-        }    
+        }
+
+        private void PrintButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                streamToPrint = new StreamReader
+                   ("C:\\My Documents\\MyFile.txt");
+                try
+                {
+                    printFont = new Font("Arial", 10);
+                    PrintDocument pd = new PrintDocument();
+                    pd.PrintPage += new PrintPageEventHandler(this.Pd_PrintPage);
+                    pd.Print();
+                }
+                finally
+                {
+                    streamToPrint.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void Pd_PrintPage(object sender, PrintPageEventArgs ev)
+        {
+            int count = 0;
+            float leftMargin = ev.MarginBounds.Left;
+            float topMargin = ev.MarginBounds.Top;
+            string line = null;
+
+            // Calculate the number of lines per page.
+            float linesPerPage = ev.MarginBounds.Height /
+               printFont.GetHeight(ev.Graphics);
+
+            // Print each line of the file.
+            while (count < linesPerPage &&
+               ((line = streamToPrint.ReadLine()) != null))
+            {
+                float yPos = topMargin + (count * printFont.GetHeight(ev.Graphics));
+                ev.Graphics.DrawString(line, printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
+                count++;
+            }
+
+            // If more lines exist, print another page.
+            if (line != null)
+                ev.HasMorePages = true;
+            else
+                ev.HasMorePages = false;
+        }
+
     }
 }

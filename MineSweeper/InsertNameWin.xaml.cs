@@ -19,29 +19,19 @@ namespace MineSweeper
     /// </summary>
     public partial class InsertNameWin : Window
     {
-        public Score Score { get; private set; }
-        public InsertNameWin(Score scr)
+        public InsertNameWin(Score CurrentRes)
         {
             InitializeComponent();
+
             Random rnd = new Random();
             Player_name.Text = "Player #" + rnd.Next(9999);
-
-            Score = scr;
-            this.DataContext = Score;
-            Send_button.Click += InsertName_Click;
+            Send_button.Click += new RoutedEventHandler((s, ae) => InsName(CurrentRes));
         }
 
-        private void Window_ContentRendered(object sender, EventArgs e)
+        private void InsName(Score CurrentRes)
         {
-            Player_name.SelectAll();
-            Player_name.Focus();
-        }
-
-        private void InsertName_Click(object sender, RoutedEventArgs e)
-        {
-            //Send name in db
-            this.DialogResult = true;
-            //Close();
+            CurrentRes.Player = Player_name.Text;
+            Close();
         }
     }
 }
