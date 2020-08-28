@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -6,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Windows.Media.Animation;
 
@@ -16,8 +18,6 @@ namespace MineSweeper
     /// </summary>
     public partial class MainWindow : Window
     {
-        static object tick = new object();
-
         System.Windows.Threading.DispatcherTimer GemClock = new System.Windows.Threading.DispatcherTimer()
         {
             Interval = new TimeSpan(0, 0, 1)
@@ -39,12 +39,17 @@ namespace MineSweeper
 
             GemClock.Tick += DispatcherTimer_Tick;
             GemClock.Stop();
-
+            
             New_Game.Click += new RoutedEventHandler((s, ae) => { NewGame(); ReClock(); }); //  New_Game_Click; 
+            ScoreTB.Click += new RoutedEventHandler((s, ae) => { CallScoreBoard(); });
         }
-
-        private void ReClock()
+        private void StopTime()
         {
+            GemClock.Stop();
+            GemClock.IsEnabled = false;
+        }
+        private void ReClock()
+        {  
             lblSeconds.Content = "00";
             lblMinutes.Content = "00";
         }
@@ -64,53 +69,46 @@ namespace MineSweeper
             else lblMinutes.Content = Convert.ToString(min);
             CommandManager.InvalidateRequerySuggested();
         }
-
-        private void TimeChange()
+        private void CallScoreBoard()
         {
-            lock (tick)
-            {
-                int min = Convert.ToInt32(lblMinutes.Content);
-                int sec = Convert.ToInt32(lblSeconds.Content);
-                sec++;
-                if (sec == 60)
-                {
-                    sec = 0;
-                    min++;
-                }
-                if (sec < 10) lblSeconds.Content = '0' + Convert.ToString(sec);
-                else lblSeconds.Content = Convert.ToString(sec);
-                if (min < 10) lblMinutes.Content = '0' + Convert.ToString(min);
-                else lblMinutes.Content = Convert.ToString(min);
-                CommandManager.InvalidateRequerySuggested();
-            }
+            EndWindow form = new EndWindow();
+            form.ShowDialog();
         }
         private void GameSummary(ref Desk[,] field, ref Settings game) //Summary current run and records data also calls EndWindow and InsNameWin
         {
             Random rnd = new Random();
-            Score CurrentRun = new Score {
-                Player = "Player #" + rnd.Next(9999),
+            Score CurrentRun = new Score
+            {
+                Name = "Player #" + rnd.Next(9999),
                 Result = 0,
-                Difficulty = "Easy",
-                send = false
+                Difficulty = "Easy"
+            };
+            Sender sending = new Sender
+            {
+                sended = false
             };
             ScoreCounter(ref field, ref game, ref CurrentRun);
             ReClock();
-            GemClock.Stop();
 
             Thread insnm = new Thread(() =>
             {
-                InsertNameWin popout = new InsertNameWin(CurrentRun);
-                popout.Show();
+                InsertNameWin popout = new InsertNameWin(CurrentRun, sending);
+                popout.ShowDialog();
             });
+
+            insnm.SetApartmentState(ApartmentState.STA);
             insnm.Start();
             insnm.Join();
-            Thread insdb = new Thread(() => 
-            { 
-                if (CurrentRun.send)
+
+
+            Thread insdb = new Thread(() =>
+            {
+
+                if (sending.sended)
                 {
-                    string querty = "INSERT INTO Scores ( Player, Result, Difficulty) " +
-                                "VALUES ( '" + CurrentRun.Player + "', '" + CurrentRun.Result + "', '" + CurrentRun.Difficulty + "' ) ";
-            
+                    string querty = "INSERT INTO Scores ( Name, Result, Difficulty) " +
+                                    "VALUES ( '" + CurrentRun.Name + "', '" + CurrentRun.Result + "', '" + CurrentRun.Difficulty + "' ) ";
+
 
                     SQLiteConnection con = new SQLiteConnection("Data Source=db/ScoreTable.db");
                     con.Open();
@@ -119,16 +117,15 @@ namespace MineSweeper
                     cmd.CommandText = querty;
                     cmd.ExecuteNonQuery();
                     con.Close();
+                    CallScoreBoard();
                 }
             });
+            insdb.SetApartmentState(ApartmentState.STA);
             insdb.Start();
             insdb.Join();
-            EndWindow form = new EndWindow();
-            form.Show();
         }
         private void GameOver(ref Desk[,] field, ref Settings game) // end of game if player pick mine
         {
-            GemClock.Stop();
             for (int i = 0; i < game.height; i++)
                 for (int j = 0; j < game.width; j++)
                 {
@@ -156,7 +153,6 @@ namespace MineSweeper
         }
         private void Victory(ref Desk[,] field, ref Settings game) // end of game if playey set all flags
         {
-            GemClock.Stop();
             bool win = true; //check if all flags was set correctly
             for (int i = 0; i < game.height; i++)
                 for (int j = 0; j < game.width; j++)
@@ -193,14 +189,14 @@ namespace MineSweeper
             else
                 aps = (game.clicks + game.R_clicks) / 1;
 
-            switch (game.width) 
+            switch (game.width)
             {
                 case 9: // Easy mode
                     {
                         CurrentRun.Difficulty = "Easy";
                         score = 9000 - 15 * (time);
-                        if (score < 500)  score = 500;
-                        if (aps >= 1)     score += 250;
+                        if (score < 500) score = 500;
+                        if (aps >= 1) score += 250;
                         if (!game.result) score /= 4;
                         break;
                     }
@@ -209,7 +205,7 @@ namespace MineSweeper
                         CurrentRun.Difficulty = "Medium";
                         score = 16000 - 15 * (time) - 25 * game.R_clicks;
                         if (score < 1000) score = 1000;
-                        if (aps >= 1)     score += 500;
+                        if (aps >= 1) score += 500;
                         if (!game.result) score /= 4;
                         break;
                     }
@@ -218,7 +214,7 @@ namespace MineSweeper
                         CurrentRun.Difficulty = "Hard";
                         score = 30000 - 15 * (time) - 50 * game.R_clicks;
                         if (score < 1500) score = 1500;
-                        if (aps >= 1)     score += 750;
+                        if (aps >= 1) score += 750;
                         if (!game.result) score /= 4;
                         break;
                     }
@@ -231,6 +227,7 @@ namespace MineSweeper
             {
                 if (field[i, j].value == "*")
                 {
+                    StopTime();
                     GameOver(ref field, ref game);
                 }
                 else
@@ -251,7 +248,10 @@ namespace MineSweeper
                 int count = Convert.ToInt32(Count_mine.Content);
                 count--;
                 if (count == 0)
+                {
+                    StopTime();
                     Victory(ref field, ref game);
+                }
                 Count_mine.Content = Convert.ToString(count);
             }
             else
@@ -357,8 +357,7 @@ namespace MineSweeper
             Settings game = new Settings
             {
                 clicks = 0,
-                R_clicks = 0,
-                GameTimer = new Thread(TimeChange)
+                R_clicks = 0
             };
 
             if (easyCB.Equals(Diff.SelectedItem))  // Easy mode
@@ -439,7 +438,11 @@ namespace MineSweeper
                     field[i, j].button = b;
                     int a = i;
                     int bb = j;
-                    b.Click += new RoutedEventHandler((s, ae) => { Action(a, bb, ref field, ref game); GemClock.Start(); });
+                    b.Click += new RoutedEventHandler((s, ae) => 
+                    { 
+                        Action(a, bb, ref field, ref game); 
+                        GemClock.Start(); 
+                    });
                     b.MouseRightButtonDown += new MouseButtonEventHandler((s, ae) => Defuse(a, bb, ref field, ref game));
                     Grid.SetRow(b, i);
                     Grid.SetColumn(b, j);

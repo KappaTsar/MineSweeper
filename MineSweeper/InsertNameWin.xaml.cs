@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace MineSweeper
 {
@@ -19,19 +9,19 @@ namespace MineSweeper
     /// </summary>
     public partial class InsertNameWin : Window
     {
-        public InsertNameWin(Score CurrentRes)
+        public InsertNameWin(Score CurrentRes, Sender sending)
         {
             InitializeComponent();
 
             Random rnd = new Random();
             Player_name.Text = "Player #" + rnd.Next(9999);
-            Send_button.Click += new RoutedEventHandler((s, ae) => InsName(CurrentRes));
-        }
+            CurrentRes.Name = Player_name.Text;
 
-        private void InsName(Score CurrentRes)
-        {
-            CurrentRes.Player = Player_name.Text;
-            Close();
+            Send_button.Click += new RoutedEventHandler((s, ae) => {
+                CurrentRes.Name = Player_name.Text;
+                sending.sended = true;
+                Close();
+            });
         }
     }
 }

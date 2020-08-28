@@ -8,24 +8,25 @@
         Title="EndWindow" Height="456" Width="804.5">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto" MinHeight="45"/>
+            <RowDefinition Height="Auto" MinHeight="360"/>
+            <RowDefinition Height="Auto" MinHeight="65"/>
         </Grid.RowDefinitions>
 
-        <WrapPanel Grid.Row="1">
-            <Button Content="Return" x:Name="ReturnButton" Margin="20,5,20,10" Click="ReturnButton_Click" Height="27" Width="55" />
-            <Button Content="Print"  x:Name="PrintButton"  Margin="20,5,20,10" Click="PrintButton_Click"  Height="27" Width="46" />
-        </WrapPanel>
-        <ListView x:Name="ScoreTab" HorizontalAlignment="Left" Height="320" VerticalAlignment="Top" Width="736" Margin="30,30,30,30">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Title}" Width="60">Player</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Company}" Width="80" >Score</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Width="57" >Difficulty</GridViewColumn>
-                </GridView>
-            </ListView.View>
-            <ListView.Resources>
-            </ListView.Resources>
-        </ListView>
+        <StackPanel HorizontalAlignment="Center"  Grid.Row="1" Orientation="Horizontal" Margin="255,0,255,0" Width="262">
+            <Button Content="Return" x:Name="ReturnButton" Margin="6,10,30,27" Click="ReturnButton_Click" Width="89" />
+            <Button Content="Print"  x:Name="PrintButton"  Margin="30,10,20,27" Click="PrintButton_Click" Width="94" />
+        </StackPanel>
+
+        <Grid HorizontalAlignment="Left" Height="320" VerticalAlignment="Top" Width="736" Margin="30,30,0,0">
+            <ListView x:Name="ScoreTab" Height="320" VerticalAlignment="Bottom">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="False">
+                        <GridViewColumn Header="Player"     Width="100" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Score"      Width="100" DisplayMemberBinding="{Binding Result}"/>
+                        <GridViewColumn Header="Difficulty" Width="100" DisplayMemberBinding="{Binding Difficulty}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
     </Grid>
 </Window>

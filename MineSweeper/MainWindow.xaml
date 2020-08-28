@@ -1,7 +1,11 @@
 ﻿<Window x:Name="GameWin" x:Class="MineSweeper.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Mine Sweeper" Cursor="Hand" Width="600" Height="500">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MineSweeper"
+        mc:Ignorable="d"
+        Title="Mine Sweeper" Cursor="Hand" Width="600" Height="546">
     <Grid x:Name="Board" Height="510" VerticalAlignment="Top"  >
         <ComboBox x:Name="Diff" HorizontalAlignment="Left" Height="24" Margin="24,57,0,0" VerticalAlignment="Top" Width="136">
             <ComboBoxItem x:Name="easyCB" Content="Easy" HorizontalAlignment="Left" Width="175" IsSelected="True" AutomationProperties.ItemType="String"/>
@@ -20,7 +24,6 @@
             <Label Content=":" HorizontalAlignment="Left" Height="30" Margin="102,0,0,0" VerticalAlignment="Top" Width="14" IsEnabled="False" Background="Transparent" Foreground="Black" FontSize="16" RenderTransformOrigin="-0.2,0.471"/>
             <Label Content="Time:" HorizontalAlignment="Left" Height="28" Margin="38,1,0,0"  VerticalAlignment="Top" Width="59" BorderBrush="{x:Null}" IsEnabled="False" RenderTransformOrigin="0.184,-0.522" Foreground="Black" FontSize="16"/>
         </Grid>
+        <Button x:Name="ScoreTB" Content="ScoreTab" HorizontalAlignment="Left" Height="19" Margin="242,14,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
-
-
 </Window>
