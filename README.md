@@ -11,4 +11,4 @@ features of WPF C#(Windows Presentation Foundation) witch I googled in Internet.
 
 
 
-![alt text](https://drive.google.com/file/d/1AoqWNlDIWdOBLglK2IMGNoEvcWB8mL9w/view?usp=sharing)       
+![alt text](![alt text](https://github.com/KappaTsar/MineSweeper/tree/master/MineSweeper/images/TriHarrrrrrrrd.png?raw=true))       
