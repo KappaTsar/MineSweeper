@@ -7,39 +7,39 @@ Constraction of this program it's not really complicated, I've used my bacis kno
 features of WPF C#(Windows Presentation Foundation) witch I googled in Internet. 
    By making this my first step in Game Development, I hope to become a Professional Game Developer :) 
    
-                                                                  ``-::/++oooooooo+++/+/::-.```                                        
+                                                                 ``-::/++oooooooo+++/+/::-.```                                        
                                                         `.:/ossssoosooooooooooo++oossoo+oooo+++:-`                            
                                                   .-/ooyssssssyhdmmmmmmmNmmmmmmmNNNNNNNNNNmdhs++++oo+:.`                         
-                                             `-/syysssyhhmmNNNmmmmmmNNNNNmmmmmmmmmmNNNNNNNNNNNNNNmmhhssoo+:`                         
-                                          ./ssyssydmNNmmNNNmNmmmNmmNNNNNmmNmmmmmmmmmmNmNmNNNNNNNNNNNNNNmhssoo+-`                    
-                                      `:oysyyhmmNNNNNNNNNmmmmmmNNNNmmmmmmmmmmmmmmmmmmmmmmmNNNNNNNNNNNNNNNNNmdyso+:.`                  
-                                   .+yyssydNNNNNNNNNNNNNmmmmmNNNNNNmmmmmmmmmmmmNNNNmmmmmmmmNNNNNNmmNmNNNNNNNNNNmhso+/.`             
-                                ./syyyhmNNNNNNNNNNNNNNNNNmNNNNNNNNNNNmmmmmmmmmmmmmmmmmmmNmmmNNNmmNNNNNNNNNNNNNNNNNmhso+:.`          
-                             `:shyhmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmNNmy/------/ohmmmmmmmmmNmmNNNmmmmNNNNmmNNNNNNNNNNNNmsso/.`           
-                           ./yhhdNNmNNNNNNNNNNNNNNNNNNNNNNNNNNNy::hms--.......--/dmh//ymmmmmmNNNNmNNNNNNmmNNNNNNNNNNNNNNdys+-`         
-                         -oyyhmNNmNNNNNNNNNNNNNNNNNNNNNNNNNNNNd:---//../+/..::--.oy/.-:ymmmmmmNNNNNNNNNNNmmmNNNNNNNNNNNNNNmyyo:`       
-                      `:syhdNNNmNNNmNNNNNNNNNNNNNNNNNNNNNNNNNNNmmddy+-.+s+.:/sy/.-:ohdmmmmmmmmNNNNNNNNNNNNmNNNNNNNNNNNNNNNNNmyso:`     
-                     :syhmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmmmmms-..../------hmmNNmmNNmmmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNdsso.    
-                   -syhdmmmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmmmmmmy/-:---:---:/sdmmmmmmNmmmmmNNNNNNNNNNNNNmNNNNNNNNNNNNNNNNNNdss/`   
-                 .+yydmmmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNyso/-:odd.----..sy+::+syhmNmmNmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNhys- 
-               `/yyhmmmmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNm/.-.omNNmyyhddhydmmdy/--hNNmNmmmmNNNNNNNNNNNNmNNNNNNNNNNNNNNNNNNNNmyy/` 
-             .ohsdmmmmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNhoyNNNNNNmmmmmNNmmmmmo/smmNmmmmmmmNNNNNNNNNNNmmNNNNNNNNNNNNNNNNNNNNNhss.
-           :yyhdmmmdmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmNmNNNmmmmNmNNNNNNNNNNmmNNNNNNNNNNNNNNNNNNNNNNdsy: 
-      	  `+hhdmdmddmmmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmNNNNNNNNNNNNNNmmNNNNNNNNNNNNNNNNNNNNNNmyy/`
- 	  `shddmmmmmmmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmNNNmNNNNNNNNNNNNNNNNmmNNNNNNNNNNNNNNNNNNNNNNNNhh+`
- 	 .shdmmmmmmmmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmNmNNNNNmNNNNNNNNNNNNmmNNNNNNNNNNNNNNNNNNNNNNNNhy+`
-  	.yhdmmmmmmmmmmNNNNNNNNNNNNNNNNmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmNmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNh+
-	yhdmmmmmmmmmNNNNNNNNNNNNNNNNNNNmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmNNNNNNNNNNNNNNNNNNNNNNNNNhy+`
-     .yhdmmmmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmdddddddddddddmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNyy/      
-     .yydmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmmddhhyyyyyyyyhyyhhyyyyyhhddmmNNNNNNNNNNNNNNNNNNNmmmNNNNNNNNNNNNNNNNNNNNNNNNyh:     
-    `shdNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmdhhyyyyyyyyhhhhhhhhhhhyhyyyyhhyyhhhdmNNNNNNNNNNNNNNNNmmmmmNNNNNNNNNNNNNNNNNNNNNNmys.    
-    +hdmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmdhhyyyyyyyyyyyhyyyyyyyyyyyyhhyhyhhhhhhhhhddmNNNNNNNNNNNNNmmNmmmNNNNNNNNNNNNNNNNNNNNNNhs+`   
-   -hhmNmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmmNNNNNNNNNNNmdhhyyyyyyyyyyyyyyhhhhhhhhhhhhhhhhhhhhhhhhhhddddddmNNNNNNNNNNNmmNmmmNmNNNNNNNNNNNNNNNNNNNNmso:   
-  `symNNNNNmmNNmNNmNNNNNNmmmmmmmmmmmmmmdmmmNNNNNNNNmhhyyyyyyyyyyyyhhhddmmmmmmmmmmmmmmmmmmmdddddddddhddddddmNNNNNNNNNNNNNmNNNNNNNNNNNNNNNNNNNNNNNso+`  
-  /yhNNmmmmmmNNNNNNNNNNmmdmmdddmmdddddddmmmNNNNNmdhyyyyyyyyyyhhhdddmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmddddddddmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNh+o-  
- `yymmmmmmmmmNNNNNNNNmmmdmmdddddmddddddddmNNNNNdhyyyyyyyyyhhdmmdddmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmNMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNm+o-  
- :yhNNmmmmmmmmmmNmmmmmmmmmmmdmddddddddddmNNNNdhyyyyyyyyyhdmmmdhdddmmmmmmmmmmmmmmddddmmmmmmmmmmmmmmmmmmmNmmmmmmNmdyyhhhhhhdddddmmmmmmNNNNNNNNNNNNmoo-  
- ssdNNmmmmmmmmmmmmmmmmmmmmmdmmmdmmdddmmmmmNNmyyyyyyyyhddmmmdysossyyyhhhhhhdmdhhhhhhhddddmmmmmmmmmmmmmmmmNmmddmmdy+.   ``````.......-----::://+++o+o: 
+                                             `-/syysssyhhmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmhhssoo+:`                         
+                                          ./ssyssydmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmhssoo+-`                    
+                                      `:oysyyhmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmdyso+:.`                  
+                                   .+yyssydNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmhso+/.`             
+                                ./syyyhNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmhso+:.`          
+                             `:shyhmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNy/------/ohNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmsso/.`           
+                           ./yhhdNNmNNNNNNNNNNNNNNNNNNNNNNNNNNNy::hms--.......--/dmh//yNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNdys+-`         
+                         -oyyhmNNmNNNNNNNNNNNNNNNNNNNNNNNNNNNNd:---//...+....+-.oy/.-:ymmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmyyo:`       
+                      `:syhdNNNmNNNmNNNNNNNNNNNNNNNNNNNNNNNNNNNmmddy+-.+S+.:+S+.-:ohdmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmyso:`     
+                     :syhmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmms-....4------hmmNNmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNdsso.    
+                   -syhdmmmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmy/-:---:---:/sdmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNdss/`   
+                 .+yydmmmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNyso/-:odd.----..sy+::+syhmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNhys- 
+                `/yyhmmmmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNm/.-.omNNmyyhddhydmmdy/--hNNmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmyy/` 
+              .ohsdmmmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNhoyNNNNNNmmmmmNNmmmmmo/smmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNhss.
+             :yyhdmmmdmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNsy: 
+           `+hhdmdmddmmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNy/`
+          `shddmmmmmmmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNh+`
+         .shdmmmmmmmmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNy+`
+        .yhdmmmmmmmmmmNNNNNNNNNNNNNNNNmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmNmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNh+
+        yhdmmmmmmmmmNNNNNNNNNNNNNNNNNNNmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN+`
+      .yhdmmmmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmdddddddddddddmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNy/ 
+     .yydmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmmddhhyyyyyyyyhyyhhyyyyyhhddmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNh: 
+    `shdNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmdhhyyyyyyyyhhhhhhhhhhhyhyyyyhhyyhhhdmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNys. 
+    +hdmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmdhhyyyyyyyyyyyhyyyyyyyyyyyyhhyhyhhhhhhhhhddmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNs+` 
+   -hhmNmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmmNNNNNNNNNNNmdhhyyyyyyyyyyyyyyhhhhhhhhhhhhhhhhhhhhhhhhhhddddddmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNso: 
+  `symNNNNNmmNNmNNmNNNNNNmmmmmmmmmmmmmmdmmmNNNNNNNNmhhyyyyyyyyyyyyhhhddmmmmmmmmmmmmmmmmmmmdddddddddhddddddmNNNNNNNNNNNNNNNNNNNNNNNNNso+`
+  /yhNNmmmmmmNNNNNNNNNNmmdmmdddmmdddddddmmmNNNNNmdhyyyyyyyyyyhhhdddmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmddddddddmmNNNNNNNNNNNNNNNNNNNNNNmh+o-
+ `yymmmmmmmmmNNNNNNNNmmmdmmdddddmddddddddmNNNNNdhyyyyyyyyyhhdmmdddmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmNMNNNNNNNNNNNNNNNNNNmm+o-
+ :yhNNmmmmmmmmmmNmmmmmmmmmmmdmddddddddddmNNNNdhyyyyyyyyyhdmmmdhdddmmmmmmmmmmmmmmddddmmmmmmmmmmmmmmmmmmmNmmmmmmNmdyyhhhhhhdddddNNNNmoo-
+ ssdNNmmmmmmmmmmmmmmmmmmmmmdmmmdmmdddmmmmmNNmyyyyyyyyhddmmmdysossyyyhhhhhhdmdhhhhhhhddddmmmmmmmmmmmmmmmmNmmddmmdy+. ``..--:://++o+o:
 .yommNNmmmmmmmmmmdmmmmmNmmmmmmmdmmmmmmmNNNNmhyyyyyyhdmmmmmhyso++ooo+++oo+/odmh+////+syyyhddmmmmmmmmmmmmmmmmmmmmmmds                     
 -ysmmmmNmmmmmmmmmmdmmmdddddddmmmmmNNNNNNNNmhyyyyhdmmmmmmmdysooooo++++////::/hmh/---:/++++oyhddmmmmmmmmmmmmmmmmmmmmy                     
 :ysmmNNNNmmmmmmmmddddddddmmmmNNNNNNNNNNmmdhyyyyhmmmmmmmmdysooooo++++/////::-:ymh/--:/::://++osydmmmmmmmmmmmmmmmmmmd                     
@@ -64,7 +64,7 @@ features of WPF C#(Windows Presentation Foundation) witch I googled in Internet.
                                   `syyyhyys` +yyyhhs+hyyssosso//+o/::::///://+++ooossssssss+`                                           
                                   .yyyhhyy/ .yyyyyhs`ohyyssso+///+///:::/-`.:--::/+so+oss+.                                             
                                   :yyyyyhy` /yyyyyhy``syhyyso++//////::::/:::-:::+soooso-                                               
-                                  +yyyhyy+  syyyyyhy  `oyhysso++///////-:://///:/oosss/`                                               
+                                  +yyyhyy+  syyyyyhy  `oyhysso++///////-:://///:/oosss/` it's free                                      
                                   syyyhyy. -yyyyyyhs    :yhyyo+++////::::::::/++oosss:                                                 
                                  `yyyhhyo  oyyyyyhh+     .hyyo+++/+++//:://///+ossys.                                                   
                                  -yyhhhy- `yyyyyyyh:      .shs+////+++ooooooossssys`                                                   
@@ -80,5 +80,4 @@ features of WPF C#(Windows Presentation Foundation) witch I googled in Internet.
                            /shyhhhy    -hhhhhhs`                                                                                       
                           .oyhhhhd-    shhhhhh.                                                                                         
                           /shhhhds    -hhhhhh+                                                                                        
-                         `syyyhyh.    oyyyyyy                                                                                          
-
+                         `syyyhyh.    oyyyyyy     
