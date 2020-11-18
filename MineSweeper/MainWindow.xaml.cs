@@ -151,7 +151,7 @@ namespace MineSweeper
             game.result = false;
             GameSummary(ref field, ref game);
         }
-        private void Victory(ref Desk[,] field, ref Settings game) // end of game if playey set all flags
+        private void Victory(ref Desk[,] field, ref Settings game) // end of game if player set all flags
         {
             bool win = true; //check if all flags was set correctly
             for (int i = 0; i < game.height; i++)
